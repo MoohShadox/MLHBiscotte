@@ -1,9 +1,12 @@
-package Vue_Controller;
+package sample;
 
-import Modele.Modele_Commande;
-import Modele.Modele_DL;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import sample.Modele.Modele_Commande;
+import sample.Modele.Modele_DL;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -29,6 +32,8 @@ public class SelectionItineraire {
 
     @FXML
     private TableColumn<Modele_DL, Boolean> SelectedColumn;
+
+    private ObservableList<Modele_DL> liste = FXCollections.emptyObservableList();
 
     @FXML
     void Valider_It(ActionEvent event) {
@@ -56,8 +61,8 @@ public class SelectionItineraire {
             return new ReadOnlyObjectWrapper<>(i);
         });
         ClientColumn.setCellValueFactory(cell -> cell.getValue().getME().nomProperty());
-
-
+        SelectedColumn.setCellValueFactory(cell -> cell.getValue().selectedProperty());
+        SelectedColumn.setCellFactory(CheckBoxTableCell.forTableColumn(SelectedColumn));
     }
 
 }
