@@ -1,3 +1,5 @@
+package sample.src;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Metamodel;
 import org.hibernate.query.Query;

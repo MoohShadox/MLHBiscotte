@@ -1,0 +1,105 @@
+-- auto-generated definition
+create table PLATS_CMD
+(
+  NUMCOMMANDE VARCHAR2(100) not null
+    constraint PLATS_FK2
+    references COMMANDE
+    on delete cascade,
+  NUMPLAT     VARCHAR2(100) not null
+    constraint PLATS_FK1
+    references PLAT
+    on delete cascade,
+  constraint PLATS_CMD_PK_2
+  primary key (NUMCOMMANDE, NUMPLAT)
+)
+/
+
+-- auto-generated definition
+create table COMMANDE
+(
+  NUMCOMMANDE VARCHAR2(100) not null
+    primary key,
+  POSITION    VARCHAR2(100)
+)
+/
+
+-- auto-generated definition
+create table DEMANDELIVRAISON
+(
+  NUMDEMANDE       VARCHAR2(100) not null
+    primary key,
+  DESTINATIONFINAL VARCHAR2(100)
+)
+/
+
+-- auto-generated definition
+create table EFFECTUER_CMD
+(
+  MATRICULE VARCHAR2(100) not null
+    constraint EFFECTUER_CMDICULE_FK
+    references ETUDIANT
+    on delete cascade,
+  POS       VARCHAR2(100),
+  NUMCMD    VARCHAR2(100) not null
+    constraint EFFECTUER_CMD_MMANDE_FK
+    references COMMANDE,
+  constraint EFFECTUERPK
+  primary key (MATRICULE, NUMCMD)
+)
+/
+
+-- auto-generated definition
+create table ETUDIANT
+(
+  MATRICULE  VARCHAR2(100) not null
+    primary key,
+  NOM        VARCHAR2(100),
+  PRENOM     VARCHAR2(100),
+  MOTDEPASSE VARCHAR2(100)
+)
+/
+
+-- auto-generated definition
+create table ETUDIANT_LIVRAISON
+(
+  MATRICULE  VARCHAR2(100) not null
+    constraint ETUDIANT_LIVRAISON_FK1
+    references ETUDIANT
+    on delete cascade,
+  NUMDEMANDE VARCHAR2(100) not null
+    constraint ETUDIANT_LIVRAISON_FK
+    references DEMANDELIVRAISON
+    on delete cascade,
+  constraint SYS_C007009
+  primary key (MATRICULE, NUMDEMANDE)
+)
+/
+
+-- auto-generated definition
+create table PLAT
+(
+  NUMPLAT  VARCHAR2(100) not null
+    primary key,
+  NOMPLAT  VARCHAR2(100),
+  PRIX     VARCHAR2(100),
+  FASTFOOD VARCHAR2(100)
+)
+/
+
+-- auto-generated definition
+create table SATISFAIRE_ENS_CMD
+(
+  NUMCOMMANDE VARCHAR2(100) not null
+    constraint SATISFAIRE_FK
+    references COMMANDE
+    on delete cascade,
+  MATRICULE   VARCHAR2(100) not null
+    constraint SATISFAIRE_FK2
+    references ETUDIANT
+    on delete cascade,
+  STATUT      VARCHAR2(100),
+  constraint SATISFAIRE_PKK
+  primary key (NUMCOMMANDE, MATRICULE)
+)
+/
+

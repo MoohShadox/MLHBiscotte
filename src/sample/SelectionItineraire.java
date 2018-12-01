@@ -3,8 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.Pane;
@@ -14,8 +13,6 @@ import sample.Modele.Modele_DL;
 import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import sample.Modele.Modele_Etudiant;
 import sample.Modele.Modele_Plat;
 
@@ -76,8 +73,34 @@ public class SelectionItineraire {
         });
         ClientColumn.setCellValueFactory(cell -> cell.getValue().getME().nomProperty());
         SelectedColumn.setCellValueFactory(cell -> cell.getValue().selectedProperty());
-        SelectedColumn.setCellFactory(cell -> cell.setCell);
-
+        TableDemandeEnCours.setEditable(true);
+        SelectedColumn.setCellFactory(CheckBoxTableCell.forTableColumn(SelectedColumn));
+        /*SelectedColumn.setCellFactory(new Callback<TableColumn<Modele_DL, Boolean>, TableCell<Modele_DL, Boolean>>() {
+            @Override
+            public TableCell<Modele_DL, Boolean> call(TableColumn<Modele_DL, Boolean> param) {
+                TableCell<Modele_DL,Boolean> C = new TableCell<>(){
+                    @Override
+                    protected void updateItem(Boolean item, boolean empty) {
+                        Node n = null;
+                        String ch = "";
+                        if(!empty && item!=null){
+                            System.out.print("ICI");
+                            CheckBox CB = new CheckBox();
+                            CB.selectedProperty().bindBidirectional(new SimpleBooleanProperty(item));
+                            n = CB;
+                            ch = "-fx-background-color : RED";
+                        }
+                        else
+                        {
+                            System.out.print("There 1  ");
+                        }
+                        setGraphic(n);
+                        setStyle(ch);
+                    }
+                };
+                return C;
+            }
+        });*/
     }
 
 }

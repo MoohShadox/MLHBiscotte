@@ -18,6 +18,10 @@ public class Modele_DL {
         this.ME = ME;
     }
 
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
+    }
+
     public void add_commande(Modele_Commande MC){
         commandes_contenus.add(MC);
     }
