@@ -8,6 +8,13 @@ public class Modele_Etudiant {
     private SimpleStringProperty matricule;
     private SimpleStringProperty mdp;
 
+    public Modele_Etudiant(String nom,String prenom,String matricule,String mdp){
+        this.nom = new SimpleStringProperty(nom);
+        this.prenom = new SimpleStringProperty(prenom);
+        this.matricule = new SimpleStringProperty(matricule);
+        this.mdp = new SimpleStringProperty(mdp);
+    }
+
     public String getNom() {
         return nom.get();
     }

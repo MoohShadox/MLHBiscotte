@@ -2,8 +2,13 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import sample.Modele.Modele_Commande;
 import sample.Modele.Modele_DL;
 import javafx.beans.property.*;
@@ -11,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import sample.Modele.Modele_Etudiant;
+import sample.Modele.Modele_Plat;
 
 
 public class SelectionItineraire {
@@ -33,15 +40,22 @@ public class SelectionItineraire {
     @FXML
     private TableColumn<Modele_DL, Boolean> SelectedColumn;
 
-    private ObservableList<Modele_DL> liste = FXCollections.emptyObservableList();
+    private ObservableList<Modele_DL> liste = FXCollections.observableArrayList();
 
     @FXML
     void Valider_It(ActionEvent event) {
-
+        Modele_DL MDL = new Modele_DL("100",new Modele_Etudiant("Racha","Salhi","161631102659","manil"));
+        Modele_Commande MC = new Modele_Commande("123","400",new Modele_Etudiant("Ramy","Khelladi","161631102322","manil"));
+        MC.add_plat(new Modele_Plat("CHAWARMA","BUVETTES1",250));
+        MDL.add_commande(MC);
+        liste.add(MDL);
     }
+
+
 
     @FXML
     void initialize(){
+        TableDemandeEnCours.setItems(liste);
         DestColumn.setCellValueFactory(cell -> cell.getValue().destinationProperty());
         NbProduitColumn.setCellValueFactory(cell -> {
             Modele_DL M = cell.getValue();
@@ -62,7 +76,8 @@ public class SelectionItineraire {
         });
         ClientColumn.setCellValueFactory(cell -> cell.getValue().getME().nomProperty());
         SelectedColumn.setCellValueFactory(cell -> cell.getValue().selectedProperty());
-        SelectedColumn.setCellFactory(CheckBoxTableCell.forTableColumn(SelectedColumn));
+        SelectedColumn.setCellFactory(cell -> cell.setCell);
+
     }
 
 }
