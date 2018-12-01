@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+        <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">toor</property>
+        <property name="hibernate.connection.pool_size">1</property>
+        <mapping class="Entity.CommandeEntity"/>
+        <mapping class="Entity.DemandelivraisonEntity"/>
+        <mapping class="Entity.EffectuerCmdEntity"/>
+        <mapping class="Entity.EtudiantEntity"/>
+        <mapping class="Entity.EtudiantLivraisonEntity"/>
+        <mapping class="Entity.PlatEntity"/>
+        <mapping class="Entity.PlatsCmdEntity"/>
+        <mapping class="Entity.SatisfaireEnsCmdEntity"/>
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
