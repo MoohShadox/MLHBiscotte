@@ -71,6 +71,7 @@ public class SelectionItineraire {
             }
             return new ReadOnlyObjectWrapper<>(i);
         });
+
         ClientColumn.setCellValueFactory(cell -> cell.getValue().getME().nomProperty());
         SelectedColumn.setCellValueFactory(cell -> cell.getValue().selectedProperty());
         TableDemandeEnCours.setEditable(true);
